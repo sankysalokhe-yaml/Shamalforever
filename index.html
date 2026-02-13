@@ -1,28 +1,170 @@
-<h2>Happy Valentine's Day ❤️</h2>
-<p style="font-size:18px">Things change with time…
-conversations, routines, timings.
+<!DOCTYPE html><html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine's Day ❤️</title><style>
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(135deg,#ff9eb5,#ffd6e0);
+color:#333;
+overflow:hidden;
+}
 
-But some comfort never really disappears.
+/* center pages */
+.page{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+box-sizing:border-box;
+text-align:center;
+}
+
+.card{
+background:white;
+padding:28px;
+border-radius:18px;
+max-width:420px;
+width:100%;
+box-shadow:0 10px 30px rgba(0,0,0,0.15);
+animation:fade 1s ease;
+}
+
+button{
+background:#ff4d6d;
+color:white;
+border:none;
+padding:12px 22px;
+border-radius:10px;
+font-size:16px;
+margin-top:15px;
+cursor:pointer;
+}
+
+.hidden{display:none;}
+
+@keyframes fade{
+from{opacity:0; transform:translateY(20px)}
+to{opacity:1; transform:translateY(0)}
+}
+
+/* intro terminal */
+#intro{
+position:fixed;
+inset:0;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:10;
+}
+
+#terminal{
+color:#00ff9c;
+font-family:monospace;
+white-space:pre-line;
+font-size:18px;
+max-width:500px;
+padding:20px;
+}
+
+/* floating hearts */
+.heart{
+position:fixed;
+bottom:-20px;
+font-size:20px;
+animation:rise linear infinite;
+opacity:0.7;
+}
+@keyframes rise{
+to{transform:translateY(-110vh); opacity:0}
+}
+</style></head><body><!-- INTRO --><div id="intro">
+<div id="terminal"></div>
+</div><!-- OPEN CARD --><div id="openPage" class="page hidden">
+<div class="card">
+<h2>Hey</h2>
+<p>I made something small today…</p>
+<button onclick="showMessage()">Open</button>
+</div>
+</div><!-- FINAL MESSAGE --><div id="messagePage" class="page hidden">
+<div class="card">
+<h2>Happy Valentine's Day ❤️</h2><p>
+Things change with time…  
+conversations, routines, timings.<br><br>But some comfort never really disappears.<br><br>
 
 You’ve always been a special kind of familiar to me —
 the kind that doesn’t need constant talking
-to still feel close.
+to still feel close.<br><br>
 
 Today just made me realise
-I still like having you in my world.
+I still like having you in my world.<br><br>
 
-No pressure, no big questions.
+No pressure, no big questions.<br><br>
 
 Just saying…
 if we ever find our way back
-to those easy conversations again,
+to those easy conversations again,<br><br>
 
-I’d really smile at that.
+I’d really smile at that.<br><br>
 
 Until then,
 I hope your day feels warm, light
-and a little extra special.
+and a little extra special.<br><br>
 
 You deserve that. ❤️
 
-</p>
+</p><button onclick="startHearts()">🙂</button>
+
+</div>
+</div><script>
+/* typing intro */
+const lines=[
+"Loading memories...",
+"",
+"Some people stay important",
+"even when life becomes busy.",
+"",
+"So today I just wanted",
+"to say something small.",
+"",
+"Happy Valentine's Day."
+];
+
+let i=0,txt="";
+function type(){
+if(i<lines.length){
+txt+=lines[i]+"\n";
+document.getElementById("terminal").textContent=txt;
+i++;
+setTimeout(type,120);
+}else{
+setTimeout(()=>{
+document.getElementById("intro").style.display="none";
+document.getElementById("openPage").classList.remove("hidden");
+},1600);
+}
+}
+type();
+
+function showMessage(){
+document.getElementById("openPage").classList.add("hidden");
+document.getElementById("messagePage").classList.remove("hidden");
+}
+
+/* hearts animation */
+function startHearts(){
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤️";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=(3+Math.random()*3)+"s";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+},300);
+}
+</script></body>
+</html>
