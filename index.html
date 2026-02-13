@@ -70,6 +70,17 @@ max-width:500px;
 padding:20px;
 }
 
+.fadePhoto{
+width:100%;
+border-radius:14px;
+opacity:0;
+transition:opacity 2s ease;
+}
+
+.show{
+opacity:1;
+}
+
 /* floating hearts */
 .heart{
 position:fixed;
@@ -116,9 +127,19 @@ and a little extra special.<br><br>
 
 You deserve that. ❤️
 
-</p><button onclick="startHearts()">🙂</button>
+<button onclick="startMemories()">🙂</button>
 
 </div>
+  <div id="memoryPage" class="page hidden">
+<div class="card">
+<h2>Some moments I still like ❤️</h2>
+
+<img id="memoryPhoto" src="photos/1.jpg" class="fadePhoto">
+
+<p id="memoryCaption" style="margin-top:15px;font-size:17px"></p>
+
+</div>
+  </div>
 </div><script>
 /* typing intro */
 const lines=[
@@ -165,6 +186,50 @@ h.style.animationDuration=(3+Math.random()*3)+"s";
 document.body.appendChild(h);
 setTimeout(()=>h.remove(),6000);
 },300);
+}
+
+const memories=[
+{img:"photos/1.jpg",text:"Some moments just stay."},
+{img:"photos/2.jpg",text:"I still smile at this one."},
+{img:"photos/3.jpg",text:"Time moved… but this didn't fade."},
+{img:"photos/4.jpg",text:"Maybe simple days were the best."}
+];
+
+let m=0;
+
+function startMemories(){
+startHearts();
+
+document.getElementById("messagePage").classList.add("hidden");
+document.getElementById("memoryPage").classList.remove("hidden");
+
+showMemory();
+}
+
+function showMemory(){
+const photo=document.getElementById("memoryPhoto");
+const caption=document.getElementById("memoryCaption");
+
+photo.classList.remove("show");
+
+setTimeout(()=>{
+photo.src=memories[m].img;
+caption.innerText=memories[m].text;
+photo.classList.add("show");
+},600);
+
+m++;
+
+if(m<memories.length){
+setTimeout(showMemory,4500);
+}else{
+setTimeout(endLine,5000);
+}
+}
+
+function endLine(){
+document.getElementById("memoryCaption").innerText=
+"Some things don’t need to be said often… just meant.";
 }
 </script></body>
 </html>
