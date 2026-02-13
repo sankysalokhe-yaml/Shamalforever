@@ -90,6 +90,21 @@ font-size:20px;
 animation:rise linear infinite;
 opacity:0.7;
 }
+
+#endPage{
+background:black;
+color:white;
+position:fixed;
+inset:0;
+z-index:20;
+animation:fadeInBg 2.5s ease forwards;
+}
+
+@keyframes fadeInBg{
+from{background:transparent;}
+to{background:black;}
+}
+
 @keyframes rise{
 to{transform:translateY(-110vh); opacity:0}
 }
@@ -127,7 +142,23 @@ You deserve that. ❤️
 </div><!-- MEMORY PAGE --><div id="memoryPage" class="page hidden">
 <div class="card">
 <h2>Some moments I still like ❤️</h2><img id="memoryPhoto" src="photos/1.jpg" class="fadePhoto"><p id="memoryCaption" style="margin-top:15px;font-size:17px"></p></div>
-</div><script>
+</div>
+<div id="endPage" class="page hidden">
+<div class="card">
+<h2>Just one last thing…</h2>
+
+<p id="finalLine" style="font-size:18px;opacity:0">
+Some feelings don’t ask for attention.
+They just stay — quietly.
+</p>
+
+<p id="finalWish" style="margin-top:18px;font-size:20px;font-weight:600;opacity:0">
+Happy Valentine's Day ❤️
+</p>
+
+</div>
+</div>
+<script>
 /* typing intro */
 const lines=[
 "Loading memories...",
@@ -209,10 +240,32 @@ m++;
 if(m<memories.length){
 setTimeout(showMemory,4500);
 }else{
+setTimeout(showEnding,5000);
+}
+}
+function showEnding(){
+
+document.getElementById("memoryPage").classList.add("hidden");
+document.getElementById("endPage").classList.remove("hidden");
+
 setTimeout(()=>{
-caption.innerText="Some things don’t need to be said often… just meant.";
-},5000);
+document.getElementById("finalLine").style.opacity="1";
+},1200);
+
+setTimeout(()=>{
+document.getElementById("finalWish").style.opacity="1";
+heartbeat();
+},3000);
 }
+
+function heartbeat(){
+setInterval(()=>{
+document.getElementById("finalWish").style.transform="scale(1.08)";
+setTimeout(()=>{
+document.getElementById("finalWish").style.transform="scale(1)";
+},300);
+},1500);
 }
+
 </script></body>
 </html>
