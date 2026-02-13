@@ -98,7 +98,7 @@ text-align:left;
 <div class="card">
 <h2 id="greet"></h2>
 <p>I made something only for you...</p>
-<button onclick="start()">Enter My Heart</button>
+<button id="enterBtn">Enter My Heart</button>
 </div>
 </div><div class="page hidden" id="quiz">
 <div class="card">
@@ -264,7 +264,9 @@ window.scrollTo(0,0);
 },800);
 }
 }
-
+document.addEventListener("DOMContentLoaded", () => {
+document.getElementById("enterBtn").addEventListener("click", start);
+});
 window.onload=typeIntro;
 
 </script></body>
