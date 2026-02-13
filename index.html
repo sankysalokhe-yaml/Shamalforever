@@ -11,7 +11,6 @@ color:#333;
 overflow:hidden;
 }
 
-/* center pages */
 .page{
 min-height:100dvh;
 display:flex;
@@ -56,7 +55,6 @@ min-height:80px;
 white-space:pre-line;
 }
 
-/* floating hearts */
 .heart{
 position:fixed;
 color:red;
@@ -67,7 +65,6 @@ from{transform:translateY(100vh);}
 to{transform:translateY(-10vh);}
 }
 
-/* intro hacker screen */
 #introScreen{
 position:fixed;
 top:0;
@@ -123,6 +120,18 @@ text-align:left;
 </div><script>
 
 const HER_NAME="Babe";
+
+/* FIX FOR MOBILE ELEMENT ACCESS */
+const intro=document.getElementById("intro");
+const quiz=document.getElementById("quiz");
+const memory=document.getElementById("memory");
+const final=document.getElementById("final");
+const question=document.getElementById("question");
+const answers=document.getElementById("answers");
+const photo=document.getElementById("photo");
+const caption=document.getElementById("caption");
+const typing=document.getElementById("typing");
+const terminal=document.getElementById("terminal");
 
 /* QUIZ */
 let questions=[
@@ -249,7 +258,7 @@ setTimeout(()=>{
 terminal.innerHTML+="\n\nTap anywhere to continue...";
 document.onclick=()=>{
 document.getElementById("introScreen").style.display="none";
-document.getElementById("intro").classList.remove("hidden");
+intro.classList.remove("hidden");
 window.scrollTo(0,0);
 };
 },800);
