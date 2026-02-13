@@ -1,164 +1,28 @@
-<!DOCTYPE html><html>
-<head>
-<meta charset="UTF-8">
-<title>For My Love ❤️</title><style>
-body{
-    margin:0;
-    font-family:'Segoe UI';
-    text-align:center;
-    background:linear-gradient(#ff9eb5,#ffd6e0);
-    color:#333;
-    overflow-x:hidden;
-}
+<h2>Happy Valentine's Day ❤️</h2>
+<p style="font-size:18px">Things change with time…
+conversations, routines, timings.
 
-.card{
-    background:white;
-    padding:30px;
-    border-radius:20px;
-    width:90%;
-    max-width:420px;
-    margin:auto;
-    box-shadow:0 10px 25px rgba(0,0,0,0.2);
-}
+But some comfort never really disappears.
 
-.page{
-min-height:100dvh;
-display:flex;
-justify-content:center;
-align-items:center;
-padding:20px;
-box-sizing:border-box;
-}
+You’ve always been a special kind of familiar to me —
+the kind that doesn’t need constant talking
+to still feel close.
 
-button{
-    padding:12px 22px;
-    border:none;
-    background:#ff4d6d;
-    color:white;
-    border-radius:10px;
-    font-size:16px;
-    margin:8px;
-    cursor:pointer;
-}
+Today just made me realise
+I still like having you in my world.
 
-.hidden{display:none;}
+No pressure, no big questions.
 
-.fade{
-animation:fade 1s ease forwards;
-}
+Just saying…
+if we ever find our way back
+to those easy conversations again,
 
-@keyframes fade{
-from{opacity:0}
-to{opacity:1}
-}
+I’d really smile at that.
 
-/* intro */
-#introScreen{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:black;
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:9999;
-}
+Until then,
+I hope your day feels warm, light
+and a little extra special.
 
-#terminalBox{
-width:90%;
-max-width:500px;
-color:#00ff9c;
-font-family:monospace;
-font-size:4vw;
-line-height:1.6;
-text-align:left;
-}
+You deserve that. ❤️
 
-@media (min-width:600px){
-#terminalBox{font-size:18px;}
-}
-</style></head><body><!-- INTRO --><div id="introScreen">
-  <div id="terminalBox">
-    <pre id="terminal"></pre>
-  </div>
-</div><!-- QUESTION PAGE --><div id="questionPage" class="page hidden">
-  <div class="card fade">
-    <h2>I won't ask anything complicated.</h2>
-    <p style="font-size:18px">
-    After everything…  
-    Do you still feel something when you think about me?
-    </p><button onclick="answerYes()">Yes… I do</button>
-<button onclick="answerNo()">I don't anymore</button>
-
-  </div>
-</div><!-- RESULT --><div id="resultPage" class="page hidden">
-  <div class="card fade">
-    <h2 id="resultTitle"></h2>
-    <p id="resultText" style="font-size:18px"></p>
-  </div>
-</div><script>
-const lines = [
-"Booting heart.exe",
-"",
-"Loading feelings...",
-"Loading memories...",
-"Loading her smile...",
-"",
-"Warning:",
-"User not present anymore.",
-"",
-"Days since we talked: Too many",
-"",
-"I tried not to message.",
-"I really did.",
-"",
-"But some dates don't listen to ego.",
-"",
-"So even if we’re strangers now...",
-"",
-"You were my favorite person once.",
-"",
-"And maybe part of me",
-"never updated that.",
-"",
-"Happy Valentine’s Day."
-];
-
-let i=0;
-let text="";
-function type(){
- if(i<lines.length){
-   text+=lines[i]+"\n";
-   document.getElementById("terminal").textContent=text;
-   i++;
-   setTimeout(type,120);
- }else{
-   setTimeout(()=>{
-     document.getElementById("introScreen").style.display="none";
-     document.getElementById("questionPage").classList.remove("hidden");
-   },2000);
- }
-}
-type();
-
-function answerYes(){
-document.getElementById("questionPage").classList.add("hidden");
-document.getElementById("resultPage").classList.remove("hidden");
-
-document.getElementById("resultTitle").innerText="Then maybe it's not over.";
-document.getElementById("resultText").innerText=
-"I’m not asking to go back to the past.\nJust… maybe we can talk once again.\nNo expectations.\nJust us.";
-}
-
-function answerNo(){
-document.getElementById("questionPage").classList.add("hidden");
-document.getElementById("resultPage").classList.remove("hidden");
-
-document.getElementById("resultTitle").innerText="I understand.";
-document.getElementById("resultText").innerText=
-"I won’t disturb your peace.\nI just wanted to wish you once.\nTake care… always.";
-}
-</script></body>
-</html>
+</p>
