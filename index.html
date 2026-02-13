@@ -11,7 +11,6 @@ color:#333;
 overflow:hidden;
 }
 
-/* center pages */
 .page{
 min-height:100vh;
 display:flex;
@@ -50,7 +49,6 @@ from{opacity:0; transform:translateY(20px)}
 to{opacity:1; transform:translateY(0)}
 }
 
-/* intro terminal */
 #intro{
 position:fixed;
 inset:0;
@@ -76,12 +74,8 @@ border-radius:14px;
 opacity:0;
 transition:opacity 2s ease;
 }
+.show{opacity:1;}
 
-.show{
-opacity:1;
-}
-
-/* floating hearts */
 .heart{
 position:fixed;
 bottom:-20px;
@@ -94,52 +88,38 @@ to{transform:translateY(-110vh); opacity:0}
 }
 </style></head><body><!-- INTRO --><div id="intro">
 <div id="terminal"></div>
-</div><!-- OPEN CARD --><div id="openPage" class="page hidden">
+</div><!-- OPEN PAGE --><div id="openPage" class="page hidden">
 <div class="card">
 <h2>Hey</h2>
 <p>I made something small today…</p>
 <button onclick="showMessage()">Open</button>
 </div>
-</div><!-- FINAL MESSAGE --><div id="messagePage" class="page hidden">
+</div><!-- MESSAGE PAGE --><div id="messagePage" class="page hidden">
 <div class="card">
 <h2>Happy Valentine's Day ❤️</h2><p>
-Things change with time…  
-conversations, routines, timings.<br><br>But some comfort never really disappears.<br><br>
+Things change with time… conversations, routines, timings.<br><br>But some comfort never really disappears.<br><br>
 
 You’ve always been a special kind of familiar to me —
-the kind that doesn’t need constant talking
-to still feel close.<br><br>
+the kind that doesn’t need constant talking to still feel close.<br><br>
 
-Today just made me realise
-I still like having you in my world.<br><br>
+Today just made me realise I still like having you in my world.<br><br>
 
 No pressure, no big questions.<br><br>
 
-Just saying…
-if we ever find our way back
-to those easy conversations again,<br><br>
+Just saying… if we ever find our way back to those easy conversations again,<br><br>
 
 I’d really smile at that.<br><br>
 
-Until then,
-I hope your day feels warm, light
-and a little extra special.<br><br>
+Until then, I hope your day feels warm, light and a little extra special.<br><br>
 
 You deserve that. ❤️
 
-<button onclick="startMemories()">🙂</button>
+</p><button onclick="startMemories()">🙂</button>
 
 </div>
-  <div id="memoryPage" class="page hidden">
+</div><!-- MEMORY PAGE --><div id="memoryPage" class="page hidden">
 <div class="card">
-<h2>Some moments I still like ❤️</h2>
-
-<img id="memoryPhoto" src="photos/1.jpg" class="fadePhoto">
-
-<p id="memoryCaption" style="margin-top:15px;font-size:17px"></p>
-
-</div>
-  </div>
+<h2>Some moments I still like ❤️</h2><img id="memoryPhoto" src="photos/1.jpg" class="fadePhoto"><p id="memoryCaption" style="margin-top:15px;font-size:17px"></p></div>
 </div><script>
 /* typing intro */
 const lines=[
@@ -165,7 +145,7 @@ setTimeout(type,120);
 setTimeout(()=>{
 document.getElementById("intro").style.display="none";
 document.getElementById("openPage").classList.remove("hidden");
-},8000);
+},2000);
 }
 }
 type();
@@ -175,7 +155,7 @@ document.getElementById("openPage").classList.add("hidden");
 document.getElementById("messagePage").classList.remove("hidden");
 }
 
-/* hearts animation */
+/* hearts */
 function startHearts(){
 setInterval(()=>{
 let h=document.createElement("div");
@@ -188,6 +168,7 @@ setTimeout(()=>h.remove(),6000);
 },300);
 }
 
+/* memories */
 const memories=[
 {img:"photos/1.jpg",text:"Some moments just stay."},
 {img:"photos/2.jpg",text:"I still smile at this one."},
@@ -199,10 +180,8 @@ let m=0;
 
 function startMemories(){
 startHearts();
-
 document.getElementById("messagePage").classList.add("hidden");
 document.getElementById("memoryPage").classList.remove("hidden");
-
 showMemory();
 }
 
@@ -223,13 +202,10 @@ m++;
 if(m<memories.length){
 setTimeout(showMemory,4500);
 }else{
-setTimeout(endLine,5000);
+setTimeout(()=>{
+caption.innerText="Some things don’t need to be said often… just meant.";
+},5000);
 }
-}
-
-function endLine(){
-document.getElementById("memoryCaption").innerText=
-"Some things don’t need to be said often… just meant.";
 }
 </script></body>
 </html>
