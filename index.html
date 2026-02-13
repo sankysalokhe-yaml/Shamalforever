@@ -1,16 +1,30 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html>
 <head>
 <meta charset="UTF-8">
-<title>For My Love ❤️</title><style>
+<title>For My Love â¤ï¸</title>
+
+<style>
 body{
-margin:0;
-font-family:'Segoe UI';
-text-align:center;
-background:linear-gradient(#ff9eb5,#ffd6e0);
-color:#333;
-overflow:hidden;
+    margin:0;
+    font-family: 'Segoe UI';
+    text-align:center;
+    background:linear-gradient(#ff9eb5,#ffd6e0);
+    color:#333;
+    overflow-x:hidden;
 }
 
+.card{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    width:90%;
+    max-width:420px;
+    margin:auto;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* CENTER ALL SCREENS PERFECTLY */
 .page{
 min-height:100dvh;
 display:flex;
@@ -20,50 +34,41 @@ padding:20px;
 box-sizing:border-box;
 }
 
-.card{
-background:white;
-padding:30px;
-border-radius:20px;
-width:90%;
-max-width:420px;
-margin:auto;
-box-shadow:0 10px 25px rgba(0,0,0,0.2);
-}
-
 button{
-padding:12px 22px;
-border:none;
-background:#ff4d6d;
-color:white;
-border-radius:10px;
-font-size:16px;
-margin:8px;
-cursor:pointer;
+    padding:12px 22px;
+    border:none;
+    background:#ff4d6d;
+    color:white;
+    border-radius:10px;
+    font-size:16px;
+    margin:8px;
+    cursor:pointer;
 }
 
 .hidden{display:none;}
 
 img{
-width:100%;
-border-radius:15px;
-margin-top:10px;
+    width:100%;
+    border-radius:15px;
+    margin-top:10px;
 }
 
 #typing{
-font-size:18px;
-min-height:80px;
-white-space:pre-line;
+    font-size:18px;
+    min-height:80px;
 }
 
 .heart{
-position:fixed;
-color:red;
-animation:float 5s linear infinite;
+    position:fixed;
+    color:red;
+    animation:float 5s linear infinite;
 }
+
 @keyframes float{
-from{transform:translateY(100vh);}
-to{transform:translateY(-10vh);}
+    from{transform:translateY(100vh);}
+    to{transform:translateY(-10vh);}
 }
+/* ===== MOBILE CINEMATIC INTRO ===== */
 
 #introScreen{
 position:fixed;
@@ -83,73 +88,93 @@ width:90%;
 max-width:500px;
 color:#00ff9c;
 font-family:monospace;
-font-size:4vw;
+font-size:4vw;          /* responsive text */
 line-height:1.6;
 text-align:left;
 }
-@media(min-width:600px){
-#terminalBox{font-size:18px;}
+
+@media (min-width:600px){
+#terminalBox{
+font-size:18px;         /* desktop size */
 }
-</style></head><body><div id="introScreen">
-<div id="terminalBox">
-<pre id="terminal"></pre>
+}
+</style>
+</head>
+
+<body>
+
+<div id="introScreen">
+  <div id="terminalBox">
+    <pre id="terminal"></pre>
+  </div>
 </div>
-</div><div class="page hidden" id="intro">
-<div class="card">
-<h2 id="greet"></h2>
+
+<!-- INTRO -->
+<div class="page" id="intro">
+  <div class="card">
+<h2>Hey Beautiful â¤ï¸</h2>
 <p>I made something only for you...</p>
-<button id="enterBtn">Enter My Heart</button>
+<button onclick="start()">Enter My Heart</button>
 </div>
-</div><div class="page hidden" id="quiz">
-<div class="card">
+</div>
+
+<!-- QUIZ -->
+<div class="page hidden" id="quiz">
+  <div class="card">
 <h3 id="question"></h3>
 <div id="answers"></div>
 </div>
-</div><div class="page hidden" id="memory">
-<div class="card">
-<h2>Our Memories 📸</h2>
+</div>
+
+<!-- MEMORY -->
+<div class="page hidden" id="memory">
+  <div class="card">
+<h2>Our Memories ðŸ“¸</h2>
 <img id="photo" src="photo1.jpg">
 <p id="caption">Our first photo together</p>
 <button onclick="nextPhoto()">Next</button>
 </div>
-</div><div class="page hidden" id="final">
-<div class="card">
-<h2>Happy Valentine's Day 💝</h2>
+</div>
+
+<!-- FINAL -->
+<div class="page hidden" id="final">
+  <div class="card">
+<h2>Happy Valentine's Day ðŸ’</h2>
 <p id="typing"></p>
 </div>
-</div><script>
+</div>
 
-const HER_NAME="Babe";
+<script>
 
-/* FIX FOR MOBILE ELEMENT ACCESS */
-const intro=document.getElementById("intro");
-const quiz=document.getElementById("quiz");
-const memory=document.getElementById("memory");
-const final=document.getElementById("final");
-const question=document.getElementById("question");
-const answers=document.getElementById("answers");
-const photo=document.getElementById("photo");
-const caption=document.getElementById("caption");
-const typing=document.getElementById("typing");
-const terminal=document.getElementById("terminal");
-
-/* QUIZ */
+// QUESTIONS
 let questions=[
-{q:"My favourite thing about you?",a:["Your smile","Your anger","Your food stealing habit"],correct:0},
-{q:"Our favorite activity?",a:["Talking all night","Watching reels","Fighting then patchup"],correct:2},
-{q:"Who loves more?",a:["Me","You","Both but I win 😜"],correct:2}
+{
+q:"My favourite thing about you?",
+a:["Your smile","Your anger","Your food stealing habit"],
+correct:0
+},
+{
+q:"Our favorite activity?",
+a:["Talking all night","Watching reels","Fighting then patchup"],
+correct:2
+},
+{
+q:"Who loves more?",
+a:["Me","You","Both but I win ðŸ˜œ"],
+correct:2
+}
 ];
 
-let current=0;
+let current=0,score=0;
 
+// START
 function start(){
-document.getElementById("greet").innerText="Hey "+HER_NAME+" ❤️";
 intro.classList.add("hidden");
 quiz.classList.remove("hidden");
-window.scrollTo(0,0);
 showQ();
 }
 
+// SHOW QUESTION
 function showQ(){
 let q=questions[current];
 question.innerText=q.q;
@@ -159,24 +184,26 @@ answers.innerHTML+=`<p><button onclick="check(${i})">${opt}</button></p>`;
 });
 }
 
+// CHECK
 function check(i){
+if(i==questions[current].correct) score++;
 current++;
 if(current<questions.length) showQ();
 else showMemory();
 }
 
-/* MEMORY */
+// MEMORY
 let photos=[
 ["photo1.jpg","The day I realised I like you"],
 ["photo2.jpg","Our cutest moment"],
 ["photo3.jpg","My favourite memory"]
 ];
+
 let p=0;
 
 function showMemory(){
 quiz.classList.add("hidden");
 memory.classList.remove("hidden");
-window.scrollTo(0,0);
 }
 
 function nextPhoto(){
@@ -187,36 +214,31 @@ caption.innerText=photos[p][1];
 }else showFinal();
 }
 
-/* FINAL */
+// FINAL MESSAGE
 function showFinal(){
 memory.classList.add("hidden");
 final.classList.remove("hidden");
-window.scrollTo(0,0);
 
-let text=
-HER_NAME+"...\n\n"+
-"Agar meri life ek movie hoti na...\n"+
-"toh uski heroine sirf tum hoti 💫\n\n"+
-"Har scene mein tum,\nHar song mein tum ❤️\n\n"+
-"Meri life ka happy ending = "+HER_NAME+"\n\n"+
-"Happy Valentine's Day 💕\nI Love You.";
+let text="No quiz score matters...\nBecause loving you was always my final answer â¤ï¸\nHappy Valentineâ€™s Day My Love ðŸ’•";
 
 let i=0;
+let speed=20;
+
 function type(){
 if(i<text.length){
 typing.innerHTML+=text.charAt(i);
 i++;
-setTimeout(type,35);
+setTimeout(type,speed);
 }else hearts();
 }
 type();
 }
 
-/* HEARTS */
+// HEART ANIMATION
 function hearts(){
 setInterval(()=>{
 let h=document.createElement("div");
-h.innerHTML="❤";
+h.innerHTML="â¤";
 h.className="heart";
 h.style.left=Math.random()*100+"vw";
 h.style.fontSize=(20+Math.random()*20)+"px";
@@ -225,49 +247,48 @@ setTimeout(()=>h.remove(),5000);
 },300);
 }
 
-/* INTRO */
+// ===== FILMY INTRO =====
+
 let lines=[
 "Establishing secure connection...",
 "Decrypting memories...",
-"Searching for: Babe ❤️",
+"Searching for: Babe â¤ï¸",
 "Match found.",
 "Opening Sanket's heart...",
 "Loading feelings...",
 "Too many emotions detected...",
 "Bypassing ego firewall...",
-"Access granted 💘"
+"Access granted ðŸ’˜"
 ];
 
-let t=0,char=0;
+let t=0;
+let char=0;
 
 function typeIntro(){
 if(t<lines.length){
-let line=lines[t];
-if(char<line.length){
-terminal.innerHTML+=line.charAt(char);
+let currentLine=lines[t];
+
+if(char<currentLine.length){
+terminal.innerHTML+=currentLine.charAt(char);
 char++;
-setTimeout(typeIntro,45);
+setTimeout(typeIntro,30);
 }else{
 terminal.innerHTML+="\n";
 char=0;
 t++;
 setTimeout(typeIntro,500);
 }
+
 }else{
 setTimeout(()=>{
-terminal.innerHTML+="\n\nTap anywhere to continue...";
-document.onclick=()=>{
 document.getElementById("introScreen").style.display="none";
-intro.classList.remove("hidden");
-window.scrollTo(0,0);
-};
 },800);
 }
 }
-document.addEventListener("DOMContentLoaded", () => {
-document.getElementById("enterBtn").addEventListener("click", start);
-});
+
 window.onload=typeIntro;
 
-</script></body>
+</script>
+
+</body>
 </html>
