@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html>
 <head>
 <meta charset="UTF-8">
-<title>For My Love ❤️</title>
-
-<style>
+<title>For My Love ❤️</title><style>
 body{
 margin:0;
 font-family:'Segoe UI';
 text-align:center;
 background:linear-gradient(#ff9eb5,#ffd6e0);
 color:#333;
-overflow-x:hidden;
+overflow:hidden;
 }
 
 /* center pages */
@@ -96,70 +93,51 @@ text-align:left;
 @media(min-width:600px){
 #terminalBox{font-size:18px;}
 }
-</style>
-</head>
-
-<body>
-
-<!-- HACKER INTRO -->
-<div id="introScreen">
+</style></head><body><div id="introScreen">
 <div id="terminalBox">
 <pre id="terminal"></pre>
 </div>
-</div>
-
-<!-- INTRO -->
-<div class="page hidden" id="intro">
+</div><div class="page hidden" id="intro">
 <div class="card">
 <h2 id="greet"></h2>
 <p>I made something only for you...</p>
 <button onclick="start()">Enter My Heart</button>
 </div>
-</div>
-
-<!-- QUIZ -->
-<div class="page hidden" id="quiz">
+</div><div class="page hidden" id="quiz">
 <div class="card">
 <h3 id="question"></h3>
 <div id="answers"></div>
 </div>
-</div>
-
-<!-- MEMORY -->
-<div class="page hidden" id="memory">
+</div><div class="page hidden" id="memory">
 <div class="card">
 <h2>Our Memories 📸</h2>
 <img id="photo" src="photo1.jpg">
 <p id="caption">Our first photo together</p>
 <button onclick="nextPhoto()">Next</button>
 </div>
-</div>
-
-<!-- FINAL -->
-<div class="page hidden" id="final">
+</div><div class="page hidden" id="final">
 <div class="card">
 <h2>Happy Valentine's Day 💝</h2>
 <p id="typing"></p>
 </div>
-</div>
-
-<script>
+</div><script>
 
 const HER_NAME="Babe";
 
-/* QUIZ QUESTIONS */
+/* QUIZ */
 let questions=[
 {q:"My favourite thing about you?",a:["Your smile","Your anger","Your food stealing habit"],correct:0},
 {q:"Our favorite activity?",a:["Talking all night","Watching reels","Fighting then patchup"],correct:2},
 {q:"Who loves more?",a:["Me","You","Both but I win 😜"],correct:2}
 ];
 
-let current=0,score=0;
+let current=0;
 
 function start(){
 document.getElementById("greet").innerText="Hey "+HER_NAME+" ❤️";
 intro.classList.add("hidden");
 quiz.classList.remove("hidden");
+window.scrollTo(0,0);
 showQ();
 }
 
@@ -173,7 +151,6 @@ answers.innerHTML+=`<p><button onclick="check(${i})">${opt}</button></p>`;
 }
 
 function check(i){
-if(i==questions[current].correct) score++;
 current++;
 if(current<questions.length) showQ();
 else showMemory();
@@ -190,6 +167,7 @@ let p=0;
 function showMemory(){
 quiz.classList.add("hidden");
 memory.classList.remove("hidden");
+window.scrollTo(0,0);
 }
 
 function nextPhoto(){
@@ -200,10 +178,11 @@ caption.innerText=photos[p][1];
 }else showFinal();
 }
 
-/* FINAL MESSAGE */
+/* FINAL */
 function showFinal(){
 memory.classList.add("hidden");
 final.classList.remove("hidden");
+window.scrollTo(0,0);
 
 let text=
 HER_NAME+"...\n\n"+
@@ -237,7 +216,7 @@ setTimeout(()=>h.remove(),5000);
 },300);
 }
 
-/* HACKER INTRO */
+/* INTRO */
 let lines=[
 "Establishing secure connection...",
 "Decrypting memories...",
@@ -271,6 +250,7 @@ terminal.innerHTML+="\n\nTap anywhere to continue...";
 document.onclick=()=>{
 document.getElementById("introScreen").style.display="none";
 document.getElementById("intro").classList.remove("hidden");
+window.scrollTo(0,0);
 };
 },800);
 }
@@ -278,7 +258,5 @@ document.getElementById("intro").classList.remove("hidden");
 
 window.onload=typeIntro;
 
-</script>
-
-</body>
+</script></body>
 </html>
