@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For My Love ❤️</title>
+
+<style>
+body{
+    margin:0;
+    font-family: 'Segoe UI';
+    text-align:center;
+    background:linear-gradient(#ff9eb5,#ffd6e0);
+    color:#333;
+    overflow-x:hidden;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    width:90%;
+    max-width:420px;
+    margin:auto;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* CENTER ALL SCREENS PERFECTLY */
+.page{
+min-height:100dvh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+box-sizing:border-box;
+}
+
+button{
+    padding:12px 22px;
+    border:none;
+    background:#ff4d6d;
+    color:white;
+    border-radius:10px;
+    font-size:16px;
+    margin:8px;
+    cursor:pointer;
+}
+
+.hidden{display:none;}
+
+img{
+    width:100%;
+    border-radius:15px;
+    margin-top:10px;
+}
+
+#typing{
+    font-size:18px;
+    min-height:80px;
+}
+
+.heart{
+    position:fixed;
+    color:red;
+    animation:float 5s linear infinite;
+}
+
+@keyframes float{
+    from{transform:translateY(100vh);}
+    to{transform:translateY(-10vh);}
+}
+/* ===== MOBILE CINEMATIC INTRO ===== */
+
+#introScreen{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+#terminalBox{
+width:90%;
+max-width:500px;
+color:#00ff9c;
+font-family:monospace;
+font-size:4vw;          /* responsive text */
+line-height:1.6;
+text-align:left;
+}
+
+@media (min-width:600px){
+#terminalBox{
+font-size:18px;         /* desktop size */
+}
+}
+</style>
+</head>
+
+<body>
+
+<div id="introScreen">
+  <div id="terminalBox">
+    <pre id="terminal"></pre>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="page" id="intro">
+  <div class="card">
+<h2>Hey Beautiful ❤️</h2>
+<p>I made something only for you...</p>
+<button onclick="start()">Enter My Heart</button>
+</div>
+</div>
+
+<!-- QUIZ -->
+<div class="page hidden" id="quiz">
+  <div class="card">
+<h3 id="question"></h3>
+<div id="answers"></div>
+</div>
+</div>
+
+<!-- MEMORY -->
+<div class="page hidden" id="memory">
+  <div class="card">
+<h2>Our Memories 📸</h2>
+<img id="photo" src="photo1.jpg">
+<p id="caption">Our first photo together</p>
+<button onclick="nextPhoto()">Next</button>
+</div>
+</div>
+
+<!-- FINAL -->
+<div class="page hidden" id="final">
+  <div class="card">
+<h2>Happy Valentine's Day 💝</h2>
+<p id="typing"></p>
+</div>
+</div>
+
+<script>
+
+// QUESTIONS
+let questions=[
+{
+q:"My favourite thing about you?",
+a:["Your smile","Your anger","Your food stealing habit"],
+correct:0
+},
+{
+q:"Our favorite activity?",
+a:["Talking all night","Watching reels","Fighting then patchup"],
+correct:2
+},
+{
+q:"Who loves more?",
+a:["Me","You","Both but I win 😜"],
+correct:2
+}
+];
+
+let current=0,score=0;
+
+// START
+function start(){
+intro.classList.add("hidden");
+quiz.classList.remove("hidden");
+showQ();
+}
+
+// SHOW QUESTION
+function showQ(){
+let q=questions[current];
+question.innerText=q.q;
+answers.innerHTML="";
+q.a.forEach((opt,i)=>{
+answers.innerHTML+=`<p><button onclick="check(${i})">${opt}</button></p>`;
+});
+}
+
+// CHECK
+function check(i){
+if(i==questions[current].correct) score++;
+current++;
+if(current<questions.length) showQ();
+else showMemory();
+}
+
+// MEMORY
+let photos=[
+["photo1.jpg","The day I realised I like you"],
+["photo2.jpg","Our cutest moment"],
+["photo3.jpg","My favourite memory"]
+];
+
+let p=0;
+
+function showMemory(){
+quiz.classList.add("hidden");
+memory.classList.remove("hidden");
+}
+
+function nextPhoto(){
+p++;
+if(p<photos.length){
+photo.src=photos[p][0];
+caption.innerText=photos[p][1];
+}else showFinal();
+}
+
+// FINAL MESSAGE
+function showFinal(){
+memory.classList.add("hidden");
+final.classList.remove("hidden");
+
+let text="No quiz score matters...\nBecause loving you was always my final answer ❤️\nHappy Valentine’s Day My Love 💕";
+
+let i=0;
+let speed=20;
+
+function type(){
+if(i<text.length){
+typing.innerHTML+=text.charAt(i);
+i++;
+setTimeout(type,speed);
+}else hearts();
+}
+type();
+}
+
+// HEART ANIMATION
+function hearts(){
+setInterval(()=>{
+let h=document.createElement("div");
+h.innerHTML="❤";
+h.className="heart";
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(20+Math.random()*20)+"px";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),5000);
+},300);
+}
+
+// ===== FILMY INTRO =====
+
+let lines=[
+"Establishing secure connection...",
+"Decrypting memories...",
+"Searching for: Babe ❤️",
+"Match found.",
+"Opening Sanket's heart...",
+"Loading feelings...",
+"Too many emotions detected...",
+"Bypassing ego firewall...",
+"Access granted 💘"
+];
+
+let t=0;
+let char=0;
+
+function typeIntro(){
+if(t<lines.length){
+let currentLine=lines[t];
+
+if(char<currentLine.length){
+terminal.innerHTML+=currentLine.charAt(char);
+char++;
+setTimeout(typeIntro,30);
+}else{
+terminal.innerHTML+="\n";
+char=0;
+t++;
+setTimeout(typeIntro,500);
+}
+
+}else{
+setTimeout(()=>{
+document.getElementById("introScreen").style.display="none";
+},800);
+}
+}
+
+window.onload=typeIntro;
+
+</script>
+
+</body>
+</html>
