@@ -158,6 +158,11 @@ Happy Valentine's Day ❤️
 
 </div>
 </div>
+
+<audio id="bgm" loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+  
 <script>
 /* typing intro */
 const lines=[
@@ -191,6 +196,10 @@ type();
 function showMessage(){
 document.getElementById("openPage").classList.add("hidden");
 document.getElementById("messagePage").classList.remove("hidden");
+
+const music=document.getElementById("bgm");
+music.volume=0.35;
+music.play().catch(()=>{});
 }
 
 /* hearts */
